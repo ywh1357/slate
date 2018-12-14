@@ -341,15 +341,16 @@ class Content extends React.Component {
     // to make sure it is in sync. (2017/10/16)
     if (handler == 'onSelect') {
       const { editor } = this.props
-      const { value } = editor
-      const { selection } = value
-      const window = getWindow(event.target)
-      const native = window.getSelection()
-      const range = findRange(native, editor)
-
-      if (range && range.equals(selection.toRange())) {
-        this.updateSelection()
-        return
+      if(!editor.state.isComposing){
+        const { value } = editor
+        const { selection } = value
+        const window = getWindow(event.target)
+        const native = window.getSelection()
+        const range = findRange(native, editor)
+        if (range && range.equals(selection.toRange())) {
+          this.updateSelection()
+          return
+        }
       }
     }
 

@@ -116,6 +116,7 @@ function BeforePlugin() {
     window.requestAnimationFrame(() => {
       if (compositionCount > n) return
       isComposing = false
+      editor.state.isComposing = isComposing
     })
 
     debug('onCompositionEnd', { event })
@@ -145,6 +146,7 @@ function BeforePlugin() {
 
   function onCompositionStart(event, editor, next) {
     isComposing = true
+    editor.state.isComposing = isComposing
     compositionCount++
 
     const { value } = editor
